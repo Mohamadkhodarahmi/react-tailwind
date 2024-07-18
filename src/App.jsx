@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from 'react'
 
 import './App.css'
 
+
 export default function App() {
     const [display, setDisplay] = useState('0')
     const [operand, setOperand] = useState(null)
@@ -15,6 +16,9 @@ export default function App() {
         else {
             setDisplay(display + value)
         }
+    }
+    const del = ()=>{
+        setDisplay(display.toString().split('').slice(0, -1).join(''));
     }
 
     const pressOperator= (operation)=>{
@@ -30,14 +34,16 @@ export default function App() {
                 setDisplay((operand + number).toString());
                 break;
             case '-':
-                setDisplay((operand + number).toString());
+                setDisplay((operand - number).toString());
                 break;
-            case '*':
-                setDisplay((operand + number).toString());
+            case '×':
+                setDisplay((operand * number).toString());
                 break;
-            case '/':
-                setDisplay((operand + number).toString());
+            case '÷':
+                setDisplay((operand / number).toString());
                 break;
+
+
         }
         setOperator(null)
         setOperand(null)
@@ -47,22 +53,28 @@ export default function App() {
     return (
         <div className='firs'>
 
-            <h2><h1>{display}</h1></h2>
+            <h2><h1>{operand}<span>{operator}</span> {display}
+            </h1>
+
+            </h2>
             <div className='main'>
-                <button onClick={()=>pressButton('1')}>1</button>
-                <button onClick={()=>pressButton('2')}>2</button>
-                <button onClick={()=>pressButton('3')}>3</button>
-                <button onClick={()=>pressButton('4')}>4</button>
-                <button onClick={()=>pressButton('5')}>5</button>
-                <button onClick={()=>pressButton('6')}>6</button>
-                <button onClick={()=>pressButton('7')}>7</button>
-                <button onClick={()=>pressButton('8')}>8</button>
-                <button onClick={()=>pressButton('9')}>9</button>
-                <button onClick={()=>pressOperator('+')}>+</button>
-                <button onClick={()=>pressOperator('-')}>-</button>
-                <button onClick={()=>pressOperator('*')}>*</button>
-                <button onClick={()=>pressOperator('/')}>/</button>
+                <button onClick={() => pressButton('1')}>1</button>
+                <button onClick={() => pressButton('2')}>2</button>
+                <button onClick={() => pressButton('3')}>3</button>
+                <button onClick={() => pressButton('4')}>4</button>
+                <button onClick={() => pressButton('5')}>5</button>
+                <button onClick={() => pressButton('6')}>6</button>
+                <button onClick={() => pressButton('7')}>7</button>
+                <button onClick={() => pressButton('8')}>8</button>
+                <button onClick={() => pressButton('9')}>9</button>
+                <button onClick={() => pressOperator('+')}>+</button>
+                <button onClick={() => pressOperator('-')}>-</button>
+                <button onClick={() => pressOperator('×')}>×</button>
+                <button onClick={() => pressOperator('÷')}>÷</button>
+
+
                 <button onClick={calculator}>=</button>
+                <button onClick={del}>del</button>
             </div>
 
         </div>)
